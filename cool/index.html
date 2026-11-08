@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ajude Seu José | Uma rede de cuidado</title>
+  <meta name="description" content="Seu José vende doces e caminha cerca de 20 quilômetros por dia para sobreviver. Conheça sua história e veja como ajudar.">
+  <meta property="og:title" content="Ajude Seu José | Uma rede de cuidado">
+  <meta property="og:description" content="Conheça a história do Seu José e participe desta rede de cuidado.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Nunito:wght@700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="site">
+    <main>
+      <section class="hero center">
+        <p class="eyebrow">Campanha solidária</p>
+        <h1 class="display">Seu José caminha <span>20 quilômetros</span> por dia para conseguir sobreviver.</h1>
+        <p class="lead">Você pode ajudar a aliviar essa caminhada.</p>
+        <p class="sub muted">Ele vende doces para conseguir o necessário para viver. Mesmo com tanto esforço, há dias em que falta comida.</p>
+      </section>
+
+      <section class="vsl center">
+        <h2 class="display">Conheça a história do Seu José</h2>
+        <div class="vsl-box">
+          <video id="vsl" class="vsl-video" src="videos/vsl.mp4" autoplay muted playsinline preload="auto" controlslist="nodownload noplaybackrate" disablepictureinpicture></video>
+          <button type="button" id="vsl-som" class="vsl-som" aria-label="Ativar o som do vídeo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+            Toque para ativar o som
+          </button>
+        </div>
+      </section>
+
+      <section id="doar">
+        <div class="card">
+          <div class="center">
+            <span class="icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
+            </span>
+            <h2 class="display h2">Ajude Seu José hoje</h2>
+            <p class="intro muted">Doe o valor que estiver ao seu alcance. Cada contribuição se soma à de outras pessoas para apoiar Seu José.</p>
+          </div>
+
+          <div class="pix-box">
+            <div class="pix-title">
+              Pix
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+
+            <p class="transparency">O Pix é recebido por <strong>[SEU NOME]</strong>, organizador desta campanha em parceria com Seu José. Os valores arrecadados são repassados a ele. Ao pagar, o recebedor que aparece no seu banco é <strong>Omega Payments Ltda</strong>, a intermediadora de pagamentos da campanha.</p>
+
+            <span class="label">Escolha o valor da doação</span>
+            <div class="amounts" role="radiogroup" aria-label="Valor da doação">
+              <button type="button" class="amount" data-valor="5">R$ 5</button>
+              <button type="button" class="amount" data-valor="10">R$ 10</button>
+              <button type="button" class="amount" data-valor="15">R$ 15</button>
+              <button type="button" class="amount" data-valor="25">R$ 25</button>
+              <button type="button" class="amount" data-valor="50">R$ 50</button>
+              <button type="button" class="amount" data-valor="100">R$ 100</button>
+            </div>
+
+            <form id="form-doador" class="doador" novalidate>
+              <span class="label">Seus dados (exigidos pelo banco para emitir o Pix)</span>
+              <input name="name" type="text" placeholder="Nome completo" autocomplete="name" required>
+              <input name="email" type="email" placeholder="E-mail" autocomplete="email" required>
+              <input name="document" type="text" placeholder="CPF" inputmode="numeric" maxlength="14" required>
+              <input name="phone" type="tel" placeholder="Telefone com DDD" autocomplete="tel" inputmode="numeric" maxlength="15" required>
+              <button type="submit" id="gerar-pix" class="btn" disabled>Escolha um valor acima</button>
+            </form>
+
+            <div id="pix-result" class="pix-result" hidden>
+              <p class="pix-valor">Doação de <strong id="pix-valor"></strong></p>
+              <div id="pix-qrcode" class="pix-qrcode"></div>
+              <textarea id="pix-code" class="pix-code" rows="3" readonly></textarea>
+              <button type="button" id="copiar-pix" class="btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copiar código Pix
+              </button>
+              <p class="pix-expira muted">Este código expira em <strong id="pix-timer">05:00</strong></p>
+              <button type="button" id="outro-valor" class="btn btn-outline">Escolher outro valor</button>
+            </div>
+            <div id="pix-pago" class="pix-pago" hidden>
+              <strong>Pagamento confirmado!</strong>
+              <p>Muito obrigado por ajudar Seu José.</p>
+            </div>
+            <p id="pix-status" class="status" role="status" aria-live="polite"></p>
+
+            <div class="steps">
+              <h3>Passo a passo para doar</h3>
+              <ol>
+                <li><span>1</span><span>Escolha o valor, preencha seus dados e toque em <strong>GERAR PIX</strong>.</span></li>
+                <li><span>2</span><span>Copie o código Pix ou leia o QR Code no aplicativo do seu banco.</span></li>
+                <li><span>3</span><span>Confira os dados do recebedor antes de confirmar o pagamento.</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="impact center">
+        <div class="card">
+          <h2 class="display h2">Impacto da sua doação</h2>
+          <div class="impact-grid">
+            <div class="impact-item"><strong>R$ 25</strong><p>Pode ajudar a pagar um almoço</p></div>
+            <div class="impact-item"><strong>R$ 50</strong><p>Pode ajudar com itens de higiene e cuidados pessoais</p></div>
+            <div class="impact-item"><strong>R$ 100</strong><p>Pode contribuir com despesas de farmácia e medicamentos</p></div>
+            <div class="impact-item"><strong>R$ 200</strong><p>Pode ajudar a comprar uma cesta básica</p></div>
+          </div>
+          <p class="note muted">Valores sugeridos. Você pode doar qualquer quantia; o custo dos itens pode variar.</p>
+        </div>
+      </section>
+
+      <section class="story alt center">
+        <img src="images/seu-jose.webp" alt="Seu José, vendedor de doces" loading="lazy">
+        <h2 class="display h2">Ele vende doces para viver. Mas nem sempre o esforço é suficiente.</h2>
+        <p class="muted">Por trás dos doces que Seu José vende, existe uma luta diária pelo básico: ter o que comer e conseguir se manter. São cerca de 20 quilômetros de caminhada por dia. Ainda assim, nem todos os dias terminam com o necessário para colocar comida na mesa. Sem familiares que possam ajudá-lo, ele enfrenta essa rotina sozinho. Esta campanha existe para reunir pessoas dispostas a dividir esse peso com ele.</p>
+        <a href="#doar" class="btn">Quero ajudar Seu José</a>
+      </section>
+
+      <section class="alt">
+        <h2 class="display h2 center">Dúvidas frequentes</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Como faço para doar?</summary>
+            <p class="muted">Escolha um valor, preencha seus dados, toque em Gerar Pix e pague com o código ou QR Code no aplicativo do seu banco. A confirmação aparece nesta página assim que o pagamento é aprovado.</p>
+          </details>
+          <details>
+            <summary>Para quem vai o dinheiro?</summary>
+            <p class="muted">A campanha é organizada por [SEU NOME] em parceria com Seu José. O Pix é recebido pelo organizador e o valor arrecadado é repassado ao Seu José. O pagamento passa por uma intermediadora, por isso no aplicativo do banco o recebedor aparece como Omega Payments Ltda.</p>
+          </details>
+          <details>
+            <summary>Existe valor mínimo?</summary>
+            <p class="muted">Não. Você escolhe o valor que estiver ao seu alcance, a partir de R$ 5.</p>
+          </details>
+          <details>
+            <summary>Como posso ajudar além de doar?</summary>
+            <p class="muted">Compartilhe esta campanha com pessoas de confiança. Assim, mais gente pode conhecer a história do Seu José.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="share center">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+        </span>
+        <h2 class="display h2">Não pode doar agora? Compartilhar também ajuda.</h2>
+        <p class="muted">Envie esta campanha para alguém que possa contribuir. Assim, mais pessoas podem conhecer Seu José e se juntar a essa ajuda.</p>
+        <button type="button" id="compartilhar" class="btn btn-outline">Compartilhar campanha</button>
+        <p id="share-status" class="status" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Campanha Seu José · Uma rede de cuidado</strong><br>
+      Organizada por [SEU NOME] em parceria com Seu José. Valores arrecadados são repassados a ele.<br>
+      <a href="privacidade.html" target="_blank" rel="noopener noreferrer">Política de privacidade</a>
+    </footer>
+
+    <div class="bottom-bar">
+      <p>Juntos pelo Seu José</p>
+      <a href="#doar" class="btn">Quero ajudar</a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const PROXY_URL = 'pix.php';
+    const EXPIRACAO_SEGUNDOS = 5 * 60;
+
+    const vsl = document.getElementById('vsl');
+    const vslSom = document.getElementById('vsl-som');
+    vsl.play().catch(() => {});
+    vslSom.addEventListener('click', () => {
+      vsl.muted = false;
+      vsl.currentTime = 0;
+      vsl.controls = true;
+      vsl.play();
+      vslSom.hidden = true;
+    });
+
+    let valorSelecionado = null;
+    let checador = null;
+    let timer = null;
+
+    const botoes = document.querySelectorAll('.amount');
+    const form = document.getElementById('form-doador');
+    const gerarBtn = document.getElementById('gerar-pix');
+    const resultado = document.getElementById('pix-result');
+    const pagoEl = document.getElementById('pix-pago');
+    const codigoEl = document.getElementById('pix-code');
+    const qrEl = document.getElementById('pix-qrcode');
+    const timerEl = document.getElementById('pix-timer');
+    const statusEl = document.getElementById('pix-status');
+
+    const textoBotao = () => valorSelecionado ? `Gerar Pix de R$ ${valorSelecionado}` : 'Escolha um valor acima';
+
+    function pararAcompanhamento() {
+      clearInterval(checador);
+      clearInterval(timer);
+    }
+
+    function voltarAoFormulario() {
+      pararAcompanhamento();
+      resultado.hidden = true;
+      form.hidden = false;
+    }
+
+    botoes.forEach(btn => {
+      btn.addEventListener('click', () => {
+        botoes.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        valorSelecionado = Number(btn.dataset.valor);
+        gerarBtn.disabled = false;
+        gerarBtn.textContent = textoBotao();
+        statusEl.textContent = '';
+        pagoEl.hidden = true;
+        voltarAoFormulario();
+      });
+    });
+
+    form.document.addEventListener('input', e => {
+      const v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      e.target.value = v.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    });
+
+    form.phone.addEventListener('input', e => {
+      const v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      e.target.value = v.replace(/^(\d{2})(\d)/, '($1) $2').replace(/(\d)(\d{4})$/, '$1-$2');
+    });
+
+    function mostrarPix(dados) {
+      codigoEl.value = dados.codigo;
+      document.getElementById('pix-valor').textContent = `R$ ${valorSelecionado},00`;
+      qrEl.innerHTML = '';
+      new QRCode(qrEl, { text: dados.codigo, width: 184, height: 184, correctLevel: QRCode.CorrectLevel.M });
+      form.hidden = true;
+      resultado.hidden = false;
+
+      let restante = EXPIRACAO_SEGUNDOS;
+      timerEl.textContent = '05:00';
+      timer = setInterval(() => {
+        restante--;
+        const m = String(Math.floor(restante / 60)).padStart(2, '0');
+        const s = String(restante % 60).padStart(2, '0');
+        timerEl.textContent = `${m}:${s}`;
+        if (restante <= 0) {
+          voltarAoFormulario();
+          statusEl.textContent = 'O código expirou. Gere um novo Pix.';
+        }
+      }, 1000);
+
+      checador = setInterval(async () => {
+        try {
+          const res = await fetch(`${PROXY_URL}?action=check_status&hash=${encodeURIComponent(dados.hash)}`, { cache: 'no-store' });
+          const status = await res.json();
+          if (status.payment_status === 'paid') {
+            pararAcompanhamento();
+            resultado.hidden = true;
+            pagoEl.hidden = false;
+            statusEl.textContent = '';
+          }
+        } catch {}
+      }, 3000);
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!valorSelecionado) return;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      gerarBtn.disabled = true;
+      gerarBtn.textContent = 'Gerando Pix...';
+      statusEl.textContent = '';
+      try {
+        const res = await fetch(PROXY_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            valor: valorSelecionado,
+            customer: {
+              name: form.name.value,
+              email: form.email.value,
+              document: form.document.value,
+              phone: form.phone.value
+            }
+          })
+        });
+        const texto = await res.text();
+        let dados;
+        try { dados = JSON.parse(texto); } catch {
+          console.error('Resposta do pix.php (HTTP ' + res.status + '):', texto);
+          throw new Error(`O servidor não executou o pix.php (HTTP ${res.status}). Ele precisa estar numa hospedagem com PHP.`);
+        }
+        if (!res.ok || !dados.codigo) {
+          console.error('Erro do pix.php:', dados);
+          throw new Error(dados.error || 'Não foi possível gerar o Pix. Tente novamente.');
+        }
+        mostrarPix(dados);
+      } catch (err) {
+        statusEl.textContent = err.message;
+      } finally {
+        gerarBtn.disabled = false;
+        gerarBtn.textContent = textoBotao();
+      }
+    });
+
+    document.getElementById('outro-valor').addEventListener('click', () => {
+      voltarAoFormulario();
+      statusEl.textContent = '';
+      document.querySelector('.amounts').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('copiar-pix').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(codigoEl.value);
+        statusEl.textContent = 'Código Pix copiado';
+      } catch {
+        codigoEl.select();
+        statusEl.textContent = 'Selecione e copie o código acima';
+      }
+    });
+
+    document.getElementById('compartilhar').addEventListener('click', async () => {
+      const shareStatus = document.getElementById('share-status');
+      const dados = { title: document.title, text: 'Conheça a história do Seu José e ajude também.', url: location.href };
+      try {
+        if (navigator.share) {
+          await navigator.share(dados);
+        } else {
+          await navigator.clipboard.writeText(location.href);
+          shareStatus.textContent = 'Link copiado';
+        }
+      } catch {}
+    });
+  </script>
+</body>
+</html>
